@@ -1,15 +1,15 @@
 - type: entity
-  name: behonker
+  name: acolyte
   parent: [ SimpleSpaceMobBase, FlyingMobBase, MobCombat ]
-  id: BaseMobBehonker
+  id: BaseMobAcolyte
   abstract: true
-  description: A floating demon aspect of the honkmother.
+  description: A confused shard of a fractured God.
   components:
     - type: GhostRole
       allowMovement: true
       makeSentient: true
-      name: ghost-role-information-behonker-name
-      description: ghost-role-information-behonker-description
+      name: ghost-role-information-acolyte-name
+      description: ghost-role-information-acolyte-description
       rules: ghost-role-information-antagonist-rules
       mindRoles:
       - MindRoleGhostRoleSoloAntagonist
@@ -20,7 +20,7 @@
       rootTask:
         task: SimpleRangedHostileCompound
     - type: HitscanBatteryAmmoProvider
-      proto: RedLaser
+      proto: RedShuttleLaser
       fireCost: 62.5
     - type: Battery
       maxCharge: 1000
@@ -34,15 +34,16 @@
       selectedMode: SemiAuto
       availableModes:
         - SemiAuto
-      soundGunshot: /Audio/Weapons/Guns/Gunshots/laser_clown.ogg
+      soundGunshot: /Audio/Weapons/Guns/Gunshots/eldritch_beam.ogg
     - type: SpamEmitSound
       sound:
-        collection: BikeHorn
+        collection: Glory
     - type: NpcFactionMember
       factions:
         - SimpleHostile
     - type: Speech
-      speechVerb: Cluwne
+      speechSounds: Divine
+      speechVerb: Electricity
     - type: CombatMode
     - type: MobMover
     - type: InputMover
@@ -51,7 +52,7 @@
       baseSprintSpeed: 5
       weightlessModifier: 1.5
     - type: Sprite
-      sprite: Mobs/Demons/behonker.rsi
+      sprite: Mobs/Demons/acolyte.rsi
       layers:
         - map: [ "enum.DamageStateVisualLayers.Base" ]
           state: alive
@@ -109,7 +110,7 @@
           Slash: 10
     - type: Anomaly
       pulseSound:
-        collection: BananiumHorn
+        path: /Audio/Magic/Eldritch/bell_of_doom.ogg
         params:
           volume: 5
     - type: Input
@@ -119,9 +120,9 @@
       bloodReagent: Laughter
 
 - type: entity
-  name: behonker
-  parent: BaseMobBehonker
-  id: MobBehonkerElectrical
+  name: acolyte
+  parent: BaseMobAcolyte
+  id: MobAcolyteElectrical
   suffix: "Pyro"
   components:
     - type: PyroclasticAnomaly
@@ -134,26 +135,26 @@
       spawnRadius: 0
 
 - type: entity
-  name: behonker
-  parent: BaseMobBehonker
-  id: MobBehonkerPyro
+  name: acolyte
+  parent: BaseMobAcolyte
+  id: MobAcolytePyro
   suffix: "Electrical"
   components:
   - type: ElectricityAnomaly
   - type: Electrified
 
 - type: entity
-  name: behonker
-  parent: BaseMobBehonker
-  id: MobBehonkerGrav
+  name: acolyte
+  parent: BaseMobAcolyte
+  id: MobAcolyteGrav
   suffix: "Grav"
   components:
   - type: GravityAnomaly
 
 - type: entity
-  name: behonker
-  parent: BaseMobBehonker
-  id: MobBehonkerIce
+  name: acolyte
+  parent: BaseMobAcolyte
+  id: MobAcolyteIce
   suffix: "Ice"
   components:
   - type: Anomaly

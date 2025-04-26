@@ -1,9 +1,7 @@
 - type: soundCollection
   id: RoundEnd
   files:
-  - /Audio/Announcements/RoundEnd/apc_destroyed.ogg
-  - /Audio/Announcements/RoundEnd/disappointed.ogg
-  - /Audio/Announcements/RoundEnd/notevenpaidforthis.ogg
+  - /Audio/Magic/Eldritch/bell_of_doom.ogg
 
 - type: soundCollection
   id: PowerOn

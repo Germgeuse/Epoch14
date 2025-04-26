@@ -14,11 +14,20 @@
 #    - /Audio/Lobby/pwmur.ogg
 #    - /Audio/Lobby/lasers_rip_apart_the_bulkhead.ogg
 #    - /Audio/Lobby/every_light_is_blinking_at_once.ogg
-#    - /Audio/Lobby/atomicamnesiammx.ogg
-  - /Audio/_RMC14/Lobby/Super_Nova_In_The_Catacombs.ogg
-  - /Audio/_RMC14/Lobby/shadowinthesilvernebula.ogg
-  - /Audio/_RMC14/Lobby/the_fallen_queen.ogg
+  - /Audio/Lobby/atomicamnesiammx.ogg
+#    /Audio/_RMC14/Lobby/Super_Nova_In_The_Catacombs.ogg
+#    - /Audio/_RMC14/Lobby/shadowinthesilvernebula.ogg
+#    - /Audio/_RMC14/Lobby/the_fallen_queen.ogg
   - /Audio/_RMC14/Lobby/enemy_is_unknown.ogg
-  - /Audio/_RMC14/Lobby/Dire_Situation.ogg
+#    - /Audio/_RMC14/Lobby/Dire_Situation.ogg
   - /Audio/_RMC14/Lobby/Time_Is_Running_Out.ogg
-  - /Audio/_RMC14/Lobby/Dropzone.ogg
+#    - /Audio/_RMC14/Lobby/Dropzone.ogg
+  - /Audio/_E14/Lobby/Are_We_Living_Like_in_Those_Days.ogg
+  - /Audio/_E14/Lobby/Eternal_Flame.ogg
+  - /Audio/_E14/Lobby/I_Believe,My_Friends.ogg
+  - /Audio/_E14/Lobby/Ogonek-Small_Light.ogg
+  - /Audio/_E14/Lobby/Oh_Little_Apple.ogg
+  - /Audio/_E14/Lobby/Space_Forces.ogg
+  - /Audio/_E14/Lobby/Those_were_the_days.ogg
+  - /Audio/_E14/Lobby/Victory_Day.ogg
+  - /Audio/_E14/Lobby/Memories.ogg

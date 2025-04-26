@@ -7,3 +7,15 @@
   id: BibleHit
   files:
   - /Audio/Effects/hit_kick.ogg
+
+- type: soundCollection
+  id: Glory
+  files:
+  - /Audio/Magic/Eldritch/holyholyholy.ogg
+  - /Audio/Magic/Eldritch/holyholyholy2.ogg
+  - /Audio/Magic/Eldritch/holyholyholy3.ogg
+  - /Audio/Magic/Eldritch/holyholyholy4.ogg
+  - /Audio/Magic/Eldritch/holyholyholy5.ogg
+  - /Audio/Magic/Eldritch/holylordalmighty.ogg
+  - /Audio/Magic/Eldritch/fullofhisglory.ogg
+  - /Audio/Magic/Eldritch/thunder_ahh.ogg
