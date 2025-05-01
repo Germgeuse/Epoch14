@@ -168,3 +168,12 @@
     path: /Audio/Animals/goat_bah.ogg
   exclaimSound:
     path: /Audio/Animals/goat_bah.ogg
+
+- type: speechSounds
+  id: Divine
+  saySound:
+    path: /Audio/Magic/Eldritch/be_not_afraid.ogg
+  askSound:
+    path: /Audio/Magic/Eldritch/be_not_afraid2.ogg
+  exclaimSound:
+    path: /Audio/Magic/Eldritch/be_not_afraid3.ogg
