@@ -2,6 +2,7 @@
   id: UNMC
   hostile:
   - RMCXeno
+  - SPP
 
 - type: npcFaction
   id: RMCXeno
@@ -24,6 +25,7 @@
   id: SPP
   hostile:
   - RMCXeno
+  - UNMC
 
 - type: npcFaction
   id: WeYa

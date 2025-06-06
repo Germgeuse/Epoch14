@@ -153,7 +153,6 @@
   - type: XenoNestable
   - type: Devourable
   - type: ImmuneToClothingRequiredStepTrigger
-  - type: Undisposable
   - type: ShortExamine
   - type: MaxDamage
     max: 719 # TODO RMC14 this should be per part and smaller
@@ -190,7 +189,6 @@
   - type: AffectableByWeeds
   - type: UserIFF
   - type: UserLimitHits
-  - type: MovementIgnoreGravity
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.7
     baseSprintSpeed: 5
