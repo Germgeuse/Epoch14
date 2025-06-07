@@ -1,0 +1,19 @@
+- type: gameMap
+  id: Lobster
+  mapName: 'Lobster'
+  mapPath: /Maps/_EP14/lobsterstation.yml
+  maxRandomOffset: 0
+  randomRotation: false
+  minPlayers: 4
+  maxPlayers: 30
+  stations:
+    Lobster:
+      stationProto: StandardUNMCWarship
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'LCS-14 Savannah'
+        - type: StationJobs
+          availableJobs:
+            # Command
+            CMCommandingOfficer: [0, 0]
+
