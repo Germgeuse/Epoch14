@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Storage;
+using Content.Shared._RMC14.Storage;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -12,11 +12,12 @@ using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
+using Robust.Shared.Map;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Hands;
 
-public sealed class RMCHandsSystem : EntitySystem
+public abstract class RMCHandsSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -85,25 +86,7 @@ public sealed class RMCHandsSystem : EntitySystem
         if (!args.CanInteract)
             return;
 
-        if (!_inventory.TryGetContainingSlot(ent.Owner, out var slot))
-            return;
-
         var user = args.User;
-
-        AlternativeVerb unequipVerb = new()
-        {
-            Text = "Unequip",
-            Act = () =>
-            {
-                if (_inventory.TryGetContainingSlot(ent.Owner, out slot) &&
-                    _inventory.TryUnequip(user, user, slot.Name, checkDoafter: true))
-                {
-                    _hands.TryPickupAnyHand(user, ent.Owner);
-                }
-            },
-        };
-
-        args.Verbs.Add(unequipVerb);
 
         if (!ent.Comp.CanToggleStorage)
             return;
@@ -132,6 +115,24 @@ public sealed class RMCHandsSystem : EntitySystem
         };
 
         args.Verbs.Add(switchStorageVerb);
+
+        if (!_inventory.TryGetContainingSlot(ent.Owner, out var slot))
+            return;
+
+        AlternativeVerb unequipVerb = new()
+        {
+            Text = "Unequip",
+            Act = () =>
+            {
+                if (_inventory.TryGetContainingSlot(ent.Owner, out slot) &&
+                    _inventory.TryUnequip(user, user, slot.Name, checkDoafter: true))
+                {
+                    _hands.TryPickupAnyHand(user, ent.Owner);
+                }
+            },
+        };
+
+        args.Verbs.Add(unequipVerb);
     }
 
     private static RMCStorageEjectState GetNextState(RMCStorageEjectState current) =>
@@ -188,6 +189,12 @@ public sealed class RMCHandsSystem : EntitySystem
 
     public bool TryStorageEjectHand(EntityUid user, EntityUid item)
     {
+        var ev = new RMCStorageEjectHandItemEvent(user);
+        RaiseLocalEvent(item, ref ev);
+
+        if (ev.Handled)
+            return true;
+
         if (!TryComp(item, out RMCStorageEjectHandComponent? eject) ||
             !TryComp(item, out StorageComponent? storage))
         {
@@ -202,6 +209,12 @@ public sealed class RMCHandsSystem : EntitySystem
         {
             _storage.OpenStorageUI(item, user, storage, false, false);
             return true;
+        }
+
+        if (!_rmcStorage.CanEject(item, user, out var popup))
+        {
+            _popup.PopupClient(popup, user, user, PopupType.SmallCaution);
+            return false;
         }
 
         if (eject.Whitelist != null)
@@ -244,4 +257,6 @@ public sealed class RMCHandsSystem : EntitySystem
         _hands.TryPickupAnyHand(user, pickUpItem.Value);
         return true;
     }
+
+    public virtual void ThrowHeldItem(EntityUid player, EntityCoordinates coordinates, float minDistance = 0.1f) { }
 }
