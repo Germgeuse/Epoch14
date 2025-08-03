@@ -1,41 +1,72 @@
 - type: jukebox
-  id: FlipFlap
-  name: X-CEED - Flip Flap
+  id: Alightflashes
+  name: EVAKU Arsenal - A light flashes in the dark
   path:
-    path: /Audio/Jukebox/flip-flap.ogg
+    path: /Audio/_E14/Jukebox/alightflashesinthedark.ogg
 
 - type: jukebox
-  id: Tintin
-  name: Jeroen Tel - Tintin on the Moon
+  id: thosedays
+  name: Wangjaesan Light Music Band - Are we living like in those days?
   path:
-    path: /Audio/Jukebox/title3.ogg
+   path: /Audio/_E14/Jukebox/Are_We_Living_Like_in_Those_Days.ogg
+  
+-  type: jukebox
+   id: EternalFlame
+   name: Soviet WWII Song - Eternal Flame
+   path:
+     path: /Audio/_E14/Jukebox/Eternal_Flame.ogg
+
+-  type: jukebox
+   id: IBelieve
+   name: The Red Army Choir - I Believe My Friends
+   path:
+     path: /Audio/_E14/Jukebox/I_Believe,My_Friends.ogg
+
+-  type: jukebox
+   id: Memories
+   name: Pochonbo Electronic Ensemble - Memories
+   path:
+     path: /Audio/_E14/Jukebox/Memories.ogg
+
+-  type: jukebox
+   id: SmallLight
+   name: Ogonek - Small Light
+   path:
+     path: /Audio/_E14/Jukebox/Ogonek-Small_Light.ogg
+
+-  type: jukebox
+   id: Analemma
+   name: Inna Pivars & The Histriones - Аналемма
+   path:
+     path: /Audio/_E14/Jukebox/analemma.ogg
+
 
 - type: jukebox
-  id: Thunderdome
-  name: MashedByMachines - Sector 11
+  id: LittleApple
+  name: The Red  Army Choir - Oh, Little Apple!
   path:
-    path: /Audio/Jukebox/sector11.ogg
+   path: /Audio/_E14/Jukebox/Oh_Little_Apple.ogg
 
 - type: jukebox
-  id: Constellations
-  name: Qwertyquerty - Constellations
+  id: SpaceForces
+  name: Alexei Goman - Space Forces
   path:
-    path: /Audio/Jukebox/constellations.ogg
+   path: /Audio/_E14/Jukebox/Space_Forces.ogg
 
 - type: jukebox
-  id: Drifting
-  name: Qwertyquerty - Drifting
+  id: ThoseWereTheDays
+  name: The Russian Guard Choir - Those were the days
   path:
-    path: /Audio/Jukebox/drifting.ogg
+   path: /Audio/_E14/Jukebox/Those_were_the_days.ogg
+  
+- type: jukebox
+  id: ThoseWereTheDays
+  name: The Russian Guard Choir - Those were the days
+  path:
+   path: /Audio/_E14/Jukebox/Those_were_the_days.ogg 
 
 - type: jukebox
-  id: starlight
-  name: Qwertyquerty - Starlight
+  id: VictoryDay
+  name: День Победы - Victory Day
   path:
-    path: /Audio/Jukebox/starlight.ogg
-
-- type: jukebox
-  id: sunset
-  name: PigeonBeans - Sunset
-  path:
-    path: /Audio/Jukebox/sunset.ogg
+   path: /Audio/_E14/Jukebox/Victory_Day.ogg 
