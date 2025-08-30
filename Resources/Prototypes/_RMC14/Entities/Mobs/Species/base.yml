@@ -45,6 +45,17 @@
       types:
         Bloodloss: -1
     damageBleedModifiers: CMBloodlossHuman
+  - type: Respirator
+    damage:
+      types:
+        Asphyxiation: 2
+    damageRecovery:
+      types:
+        Asphyxiation: -1.0
+  - type: Barotrauma
+    damage:
+      types:
+        Blunt: 0.15 #per second, scales with pressure and other constants.
   - type: Woundable
   - type: StatusEffects
     allowed:
@@ -160,7 +171,7 @@
     max: 719 # TODO RMC14 this should be per part and smaller
   - type: Perishable
     rotAfter: 300
-    ignoreTemperature: true
+    ignoreTemperature: false
   - type: AtmosExposed
   - type: Temperature
     heatDamageThreshold: 325

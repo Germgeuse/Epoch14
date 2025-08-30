@@ -41,3 +41,16 @@
   - type: Construction
     graph: BananiumStatueClown
     node: bananiumStatue
+
+- type: entity
+  id: MarbleMarx
+  parent: BaseStructure
+  name: The Founder's Likeness
+  description: An ancient marble statue. The subject is depicted holding a manifesto and gazing at the horizon.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: Structures/Decoration/statues.rsi
+    state: marble_marx
+    drawdepth: Mobs
+    offset: "0.0,0.5"

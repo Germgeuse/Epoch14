@@ -47,9 +47,9 @@
 #          CMResearcher: [2, 2]
 
           #Requisition
-          CMQuartermaster: [1, 1]
-          CMCargoTech: [4, 4]
-          CMMessTech: [1, 1]
+#         CMQuartermaster: [1, 1]
+#         CMCargoTech: [4, 4]
+#         CMMessTech: [1, 1]
 
           #Marines
           CMSquadLeader: [4, 4]
@@ -65,3 +65,6 @@
 
           # Other
           CMLiaison: [1, 1]
+
+          #Socialists
+          RMCRankSPPRyadovoy: [4, 4]
