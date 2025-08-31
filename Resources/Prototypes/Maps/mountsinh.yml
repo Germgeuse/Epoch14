@@ -68,3 +68,7 @@
 
           #Socialists
           RMCRankSPPRyadovoy: [4, 4]
+
+          #Xenomorph
+          CMSpawnPointXeno: [1, 1]
+          CMSpawnPointXenoLeader: [1, 1]
