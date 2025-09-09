@@ -21,6 +21,8 @@ public sealed class MarineControlComputerBui(EntityUid owner, Enum uiKey) : Boun
 
         _window.AlertButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerAlertLevelMsg());
 
+        _window.ShipAnnouncementButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerShipAnnouncementMsg());
+
         _window.MedalButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerMedalMsg());
 
         _window.EvacuationButton.OnPressed += _ =>
@@ -49,9 +51,9 @@ public sealed class MarineControlComputerBui(EntityUid owner, Enum uiKey) : Boun
 
         // TODO RMC14 estimated time until escape pod launch
         if (_confirmingEvacuation)
-            _window.EvacuationButton.Text = "Confirm?";
+            _window.EvacuationButton.Text = Loc.GetString("rmc-almayer-control-evacuate-confirm");
         else
-            _window.EvacuationButton.Text = computer.Evacuating ? "Cancel Evacuation" : "Initiate Evacuation";
+            _window.EvacuationButton.Text = Loc.GetString("rmc-almayer-control-evacuate", ("evacuating", computer.Evacuating));
 
         _window.EvacuationButton.Disabled = !computer.CanEvacuate;
     }

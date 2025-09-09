@@ -1,4 +1,12 @@
 ﻿cm-ui-rmc14 = RMC14
+cm-ui-audio-voicelines-arachnid = Play voicelines for arachnids
+cm-ui-audio-voicelines-diona = Play voicelines for dionae
+cm-ui-audio-voicelines-dwarf = Play voicelines for dwarves
+cm-ui-audio-voicelines-felinid = Play voicelines for felinids
+cm-ui-audio-voicelines-human = Play voicelines for humans
+cm-ui-audio-voicelines-moth = Play voicelines for moths
+cm-ui-audio-voicelines-reptilian = Play voicelines for reptilians
+cm-ui-audio-voicelines-slime = Play voicelines for slimes
 
 rmc-ui-options-cassettes-volume = Cassette volume:
 rmc-ui-options-hijack-song-volume = Hijack song volume:
@@ -38,7 +46,7 @@ rmc-ui-audio-emotes-skrell = Play emotes for skrells
 
 cm-ui-roadmap = Roadmap
 
-rmc-ui-link-discord-account = Link Discord Account
+rmc-ui-link-discord-account = Link Discord
 rmc-ui-link-discord-account-text = Click the button below to copy your code.
   Then go to the #account-linking channel to link your accounts.
 rmc-ui-link-discord-account-copy = Copy code
@@ -92,7 +100,16 @@ rmc-ui-auto-punctuate = Automatically punctuate in-character messages
 rmc-ui-auto-eject-magazines = Automatically eject magazines from guns
 rmc-ui-damage-yourself = Enable being able to hurt yourself with melee and guns
 
-rmc-tacmap-alert-area = Current Area: {$area}
-rmc-tacmap-alert-no-area = Unknown
+rmc-area-info = {$area}{$restrictions}
+rmc-tacmap-alert-ceiling-level-0 = [color=green]✓[/color] All actions allowed
+rmc-tacmap-alert-ceiling-level-1 = [color=red]✗[/color] Mortar Placement, Lasing, Medevac
+rmc-tacmap-alert-ceiling-level-2 = [color=red]✗[/color] Supply Drops, Mortar Fire
+rmc-tacmap-alert-ceiling-level-3 = [color=red]✗[/color] CAS
+rmc-tacmap-alert-ceiling-level-4 = [color=red]✗[/color] OB
+rmc-tacmap-alert-allowed-actions = [color=green]✓[/color] {$actions}
+rmc-tacmap-alert-restricted-actions = [color=red]✗[/color] {$actions}
+rmc-tacmap-alert-no-area = Unknown area
 
 rmc-ui-options-alternate-sprites = Use non-trypophobia inducing sprites
+
+rmc-ui-options-chat-squad-color-mode = Colorize names of the speaker by squads

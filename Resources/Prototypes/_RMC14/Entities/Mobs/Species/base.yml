@@ -1,4 +1,4 @@
-- type: entity
+﻿- type: entity
   save: false
   parent: BaseMobSpecies
   id: CMBaseMobSpeciesOrganic
@@ -16,6 +16,7 @@
         restitution: 0.0
         mask:
         - MobMask
+        - BarricadeImpassable
         - BarbedBarricade
         layer:
         - Opaque
@@ -65,7 +66,6 @@
     - KnockedDown
     - SlowedDown
     - Stutter
-    - SeeingRainbows
     - Electrocution
     - ForcedSleep
     - TemporaryBlindness
@@ -81,6 +81,10 @@
     - Blinded
     - Deaf
     - Unconscious
+  - type: InteractionPopup
+    successChance: 1
+    interactSuccessString: rmc-patting-success-generic
+    messagePerceivedByOthers: rmc-patting-success-generic-others
   - type: Blindable
   - type: Tag
     tags:
@@ -125,6 +129,8 @@
     damage:
       types:
         Heat: 1
+  - type: RMCRevivable
+  - type: RMCMedicalExamine
   - type: FireVisuals
     sprite: Mobs/Effects/onfire.rsi
     normalState: Generic_mob_burning
@@ -152,6 +158,7 @@
       enum.HolocardChangeUIKey.Key:
         type: HolocardChangeBoundUserInterface
         interactionRange: 0
+        requireInputValidation: false
       enum.CMMobStateActionsUI.Key:
         type: CMGhostActionBui
         requireInputValidation: false
@@ -368,6 +375,7 @@
   - type: RMCDisarmable
   - type: StunOnExplosionReceived
   - type: DeafenWhileCrit
+  - type: RMCStopDropRollVisuals
   - type: XenoToggleChargingDamage
     damage:
       types:
@@ -385,3 +393,15 @@
     drawDepths:
       Dead: DeadMobs
   - type: IVDripTarget
+  - type: FixedIdentity
+    name: rmc-host
+    whitelist:
+      components:
+      - Xeno
+  - type: HiddenAppearance
+    whitelist:
+      components:
+      - Xeno
+  - type: RMCHealthIcons
+  - type: RMCMesonsNonviewable
+    xenoVisible: true

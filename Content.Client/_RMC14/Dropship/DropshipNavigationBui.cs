@@ -1,5 +1,6 @@
 ﻿using Content.Client.Message;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared.Doors.Components;
 using Content.Shared.Shuttles.Systems;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
@@ -52,8 +53,8 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
         _window = this.CreateWindow<DropshipNavigationWindow>();
         _window.OnClose += OnClose;
-        SetFlightHeader("Flight Controls");
-        SetDoorHeader("Lockdown");
+        SetFlightHeader(Loc.GetString("rmc-dropship-navigation-flight-controls"));
+        SetDoorHeader(Loc.GetString("rmc-dropship-navigation-lockdown"));
 
         if (_entities.TryGetComponent(Owner, out TransformComponent? transform) &&
             _entities.TryGetComponent(transform.ParentUid, out MetaDataComponent? metaData))
@@ -63,9 +64,11 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
         _window.CancelButton.Button.OnPressed += _ =>
         {
-            SetCancelLaunchDisabled(true);
+            SetLaunchDisabled(true);
+            SetCancelDisabled(true);
             _selected = null;
             ResetDestinationButtons();
+            CancelFlyby();
         };
 
         _window.LaunchButton.Button.OnPressed += _ =>
@@ -73,12 +76,15 @@ public sealed class DropshipNavigationBui : BoundUserInterface
             if (_selected != null)
                 SendPredictedMessage(new DropshipNavigationLaunchMsg(_selected.Value));
 
-            SetCancelLaunchDisabled(true);
+            SetLaunchDisabled(true);
             _selected = null;
             ResetDestinationButtons();
         };
 
-        _window.LockdownButton.Button.OnPressed += _ => SendPredictedMessage(new DropshipLockdownMsg());
+        _window.LockdownButton.Button.OnPressed += _ => SendPredictedMessage(new DropshipLockdownMsg(DoorLocation.None));
+        _window.LockdownButtonAft.Button.OnPressed += _ => SendPredictedMessage(new DropshipLockdownMsg(DoorLocation.Aft));
+        _window.LockdownButtonPort.Button.OnPressed += _ => SendPredictedMessage(new DropshipLockdownMsg(DoorLocation.Port));
+        _window.LockdownButtonStarboard.Button.OnPressed += _ => SendPredictedMessage(new DropshipLockdownMsg(DoorLocation.Starboard));
         _entities.System<DropshipSystem>().Uis.Add(this);
     }
 
@@ -93,7 +99,7 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         if (_window == null)
             return;
 
-        SetFlightHeader("Flight Controls");
+        SetFlightHeader(Loc.GetString("rmc-dropship-navigation-flight-controls"));
 
         _window.DestinationsContainer.Visible = true;
         _window.ProgressBarContainer.Visible = false;
@@ -114,7 +120,8 @@ public sealed class DropshipNavigationBui : BoundUserInterface
             button.Button.OnPressed += _ =>
             {
                 button.Text = $"> {name}";
-                SetCancelLaunchDisabled(false);
+                SetLaunchDisabled(false);
+                SetCancelDisabled(false);
                 onPressed();
                 ResetDestinationButtons();
             };
@@ -123,20 +130,22 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         }
 
         if (destinations.FlyBy is { } flyBy)
-            _window.DestinationsContainer.AddChild(DestinationButton("Flyby", false, () => _selected = flyBy));
+            _window.DestinationsContainer.AddChild(DestinationButton(Loc.GetString("rmc-dropship-navigation-flyby"), false, () => _selected = flyBy));
 
         _destinations.Clear();
         foreach (var destination in destinations.Destinations)
         {
             var name = destination.Name;
             if (destination.Primary)
-                name += " (Primary)";
+                name += Loc.GetString("rmc-dropship-navigation-primary");
 
             var button = DestinationButton(name, destination.Occupied, () => _selected = destination.Id);
 
             _destinations[button] = name;
             _window.DestinationsContainer.AddChild(button);
         }
+
+        RefreshDoorLockStatus(destinations.DoorLockStatus);
     }
 
     private void Set(DropshipNavigationTravellingBuiState travelling)
@@ -146,9 +155,13 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
         _window.DestinationsContainer.Visible = false;
         _window.ProgressBarContainer.Visible = true;
-        _window.CancelButton.Visible = false;
         _window.LaunchButton.Visible = false;
         _window.ProgressBar.Margin = new Thickness(0, 5, 0, 0);
+
+        if (travelling.Destination == travelling.DepartureLocation)
+            _window.CancelButton.Visible = true;
+        else
+            _window.CancelButton.Visible = false;
 
         var time = Math.Ceiling((travelling.Time.End - _timing.CurTime).TotalSeconds);
         if (time < 0.01)
@@ -160,28 +173,33 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         switch (travelling.State)
         {
             case FTLState.Starting:
-                SetFlightHeader("Launch in progress");
-                _window.ProgressBarHeader.SetMarkup(Msg($"Launching in T-{time}s to {destination}"));
+                SetFlightHeader(Loc.GetString("rmc-dropship-navigation-launch-in-progress"));
+                _window.ProgressBarHeader.SetMarkup(Msg(Loc.GetString("rmc-dropship-navigation-launching", ("time", time), ("destination", destination))));
                 _window.LockdownButton.Disabled = false;
                 break;
             case FTLState.Travelling:
-                SetFlightHeader($"In flight: {destination}");
-                _window.ProgressBarHeader.SetMarkup(Msg($"Time until destination: T-{time}s"));
+                SetFlightHeader(Loc.GetString("rmc-dropship-navigation-in-flight", ("destination", destination)));
+                _window.ProgressBarHeader.SetMarkup(Msg(Loc.GetString("rmc-dropship-navigation-time-until-destination", ("time", time))));
                 _window.LockdownButton.Disabled = true;
+                SetCancelDisabled(false);
                 break;
             case FTLState.Arriving:
-                SetFlightHeader($"Final Approach: {destination}");
-                _window.ProgressBarHeader.SetMarkup(Msg($"Time until landing: T-{time}s"));
+                SetFlightHeader(Loc.GetString("rmc-dropship-navigation-final-approach", ("destination", destination)));
+                _window.ProgressBarHeader.SetMarkup(Msg(Loc.GetString("rmc-dropship-navigation-time-until-landing", ("time", time))));
                 _window.LockdownButton.Disabled = true;
+                SetCancelDisabled(true);
                 break;
             case FTLState.Cooldown:
-                SetFlightHeader("Refueling in progress");
-                _window.ProgressBarHeader.SetMarkup(Msg($"Ready to launch in T-{time}s"));
+                SetFlightHeader(Loc.GetString("rmc-dropship-navigation-refueling-in-progress"));
+                _window.ProgressBarHeader.SetMarkup(Msg(Loc.GetString("rmc-dropship-navigation-ready-to-launch", ("time", time))));
                 _window.LockdownButton.Disabled = false;
+                SetCancelDisabled(true);
                 break;
             default:
                 return;
         }
+
+        RefreshDoorLockStatus(travelling.DoorLockStatus);
 
         var startEndTime = travelling.Time;
         _window.ProgressBar.MinValue = 0;
@@ -199,13 +217,31 @@ public sealed class DropshipNavigationBui : BoundUserInterface
         _window?.DoorHeader.SetMarkup($"[color=#0BDC49][font size=16][bold]{label}[/bold][/font][/color]");
     }
 
-    private void SetCancelLaunchDisabled(bool disabled)
+    private void SetLaunchDisabled(bool disabled)
+    {
+        if (_window == null)
+            return;
+
+        _window.LaunchButton.Button.Disabled = disabled;
+    }
+
+    private void SetCancelDisabled(bool disabled)
     {
         if (_window == null)
             return;
 
         _window.CancelButton.Button.Disabled = disabled;
-        _window.LaunchButton.Button.Disabled = disabled;
+    }
+
+    private void SetLockDownDisabled(bool disabled)
+    {
+        if (_window == null)
+            return;
+
+        _window.LockdownButton.Button.Disabled = disabled;
+        _window.LockdownButtonAft.Button.Disabled = disabled;
+        _window.LockdownButtonPort.Button.Disabled = disabled;
+        _window.LockdownButtonStarboard.Button.Disabled = disabled;
     }
 
     private void ResetDestinationButtons()
@@ -223,6 +259,30 @@ public sealed class DropshipNavigationBui : BoundUserInterface
 
             button.Text = name;
         }
+    }
+
+    private void CancelFlyby()
+    {
+        if (_window == null)
+            return;
+
+        SendPredictedMessage(new DropshipNavigationCancelMsg());
+    }
+
+    private void RefreshDoorLockStatus(Dictionary<DoorLocation, bool> dooorLockStatus)
+    {
+        if (_window == null)
+            return;
+
+        dooorLockStatus.TryGetValue(DoorLocation.Aft, out var aftStatus);
+        dooorLockStatus.TryGetValue(DoorLocation.Port, out var portStatus);
+        dooorLockStatus.TryGetValue(DoorLocation.Starboard, out var starboardStatus);
+        var lockdownStatus = aftStatus && portStatus && starboardStatus;
+
+        _window.LockdownButton.Text = lockdownStatus ? "Lift Lockdown" : "Lockdown";
+        _window.LockdownButtonAft.Text = aftStatus ? "Unlock Aft" : "Lock Aft";
+        _window.LockdownButtonPort.Text = portStatus ? "Unlock Port" : "Lock Port";
+        _window.LockdownButtonStarboard.Text = starboardStatus ? "Unlock Starboard" : "Lock Starboard";
     }
 
     public void Update()
