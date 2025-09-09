@@ -1,7 +1,7 @@
 - type: entity
   save: false
   parent: CMBaseMobSpeciesOrganic
-  id: CMMobDwarf
+  id: CMMobHumanTypeD
   name: Urist C.M McHands The Dwarf
   suffix: RMC14
   components:

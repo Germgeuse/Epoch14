@@ -23,7 +23,7 @@
     netsync: false
     noRot: true
     drawdepth: Mobs
-    # scale: 1, 0.8        # same as RMC dwarves (please reconsider allowing dwarf-sized rodentia)
+    scale: 1, 0.8        # same as RMC dwarves (please reconsider allowing dwarf-sized rodentia)
     layers:
       - map: [ "enum.HumanoidVisualLayers.Chest" ]
       - map: [ "enum.HumanoidVisualLayers.Head" ]

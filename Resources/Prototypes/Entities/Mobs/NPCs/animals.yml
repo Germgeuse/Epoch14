@@ -1635,7 +1635,7 @@
 
 - type: entity
   name: mouse
-  parent: SimpleMobBase
+  parent: [SimpleMobBase, MobCombat, MobRespirator]
   id: MobMouse
   description: Squeak!
   components:
@@ -1766,14 +1766,15 @@
   - type: Respirator
     damage:
       types:
-        Asphyxiation: 0.25
+        Asphyxiation: 2
     damageRecovery:
       types:
-        Asphyxiation: -0.25
+        Asphyxiation: -1.0
   - type: Barotrauma
     damage:
       types:
-        Blunt: 0.1
+        Blunt: 0.50
+        Cold: 0.5
   - type: Vocal
     sounds:
       Male: Mouse
@@ -1789,7 +1790,7 @@
     animation: WeaponArcBite
     damage:
       types:
-        Piercing: 0
+        Piercing: 1
   - type: Bloodstream
     bloodMaxVolume: 50
   - type: CanEscapeInventory
