@@ -42,7 +42,6 @@
   - type: GhostRole
     prob: 0
   - type: CrashLandable
-  - type: PressureImmunity
   - type: Respirator
     minSaturation: 5.0
   - type: Temperature
@@ -56,7 +55,6 @@
   components:
   - type: GhostRole
     prob: 0
-  - type: PressureImmunity
   - type: Respirator
     minSaturation: 5.0
   - type: Temperature
@@ -70,7 +68,6 @@
   components:
   - type: GhostRole
     prob: 0
-  - type: PressureImmunity
   - type: Respirator
     minSaturation: 5.0
   - type: Temperature
@@ -200,7 +197,8 @@
   - type: Barotrauma
     damage:
       types:
-        Blunt: 0.1
+        Blunt: 0.50
+        Cold: 0.5
   - type: Vocal
     sounds:
       Male: Mouse
@@ -216,7 +214,7 @@
     animation: WeaponArcBite
     damage:
       types:
-        Piercing: 0
+        Piercing: 1
   - type: Bloodstream
     bloodMaxVolume: 50
   - type: CanEscapeInventory
@@ -233,7 +231,6 @@
       Burger: RatBurger
       Skewer: RatSkewer
   - type: CrashLandable
-  - type: PressureImmunity
   - type: Respirator
     minSaturation: 5.0
   - type: Temperature
@@ -304,7 +301,6 @@
     follow: true
     location: Mister Wiggles
   - type: CrashLandable
-  - type: PressureImmunity
   - type: Respirator
     minSaturation: 5.0
   - type: Temperature
@@ -321,7 +317,6 @@
     follow: true
     location: Jones
   - type: CrashLandable
-  - type: PressureImmunity
   - type: Respirator
     minSaturation: 5.0
   - type: Temperature
@@ -338,7 +333,6 @@
     follow: true
     location: Orion
   - type: CrashLandable
-  - type: PressureImmunity
   - type: Respirator
     minSaturation: 5.0
   - type: Temperature
@@ -355,7 +349,6 @@
     follow: true
     location: Garry
   - type: CrashLandable
-  - type: PressureImmunity
   - type: Respirator
     minSaturation: 5.0
   - type: Temperature

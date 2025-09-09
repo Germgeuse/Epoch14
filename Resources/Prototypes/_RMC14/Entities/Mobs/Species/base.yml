@@ -45,6 +45,7 @@
       types:
         Bloodloss: -1
     damageBleedModifiers: CMBloodlossHuman
+  - type: Internals
   - type: Respirator
     damage:
       types:
@@ -55,7 +56,8 @@
   - type: Barotrauma
     damage:
       types:
-        Blunt: 0.15 #per second, scales with pressure and other constants.
+        Blunt: 0.50
+        Cold: 0.5 #per second, scales with pressure and other constants.
   - type: Woundable
   - type: StatusEffects
     allowed:
